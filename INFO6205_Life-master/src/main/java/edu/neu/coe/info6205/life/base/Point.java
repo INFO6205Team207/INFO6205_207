@@ -7,6 +7,8 @@ import java.util.function.UnaryOperator;
 
 public class Point implements Comparable<Point> {
 
+	   //test
+
 		public int getX() {
 				return x;
 		}
