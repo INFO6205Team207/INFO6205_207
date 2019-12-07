@@ -412,7 +412,7 @@ public class Group implements Generational<Group, Void>, Renderable, Countable {
 				else return getAbsolute(extent1.move(extent2.getX(), 0));
 		}
 
-		private void updateExtents(Point point) {
+		public void updateExtents(Point point) {
 				if (point == null) throw new LifeException("updateExtents: point is null");
 				if (extent2 == null) extent2 = point;
 				if (extent1 == null) extent1 = point;

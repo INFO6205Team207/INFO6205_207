@@ -163,7 +163,7 @@ public class Point implements Comparable<Point> {
 		 * @throws NumberFormatException          if one of the coordinates cannot be parsed as an integer.
 		 * @throws ArrayIndexOutOfBoundsException if the string cannot be split into two sub-strings.
 		 */
-		private static Point point(String s) {
+		public static Point point(String s) {
 				String[] ws = s.split(" ");
 				int x = Integer.parseInt(ws[0]);
 				int y = Integer.parseInt(ws[1]);

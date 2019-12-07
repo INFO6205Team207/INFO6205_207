@@ -1,7 +1,5 @@
 package edu.neu.coe.info6205.life.base;
 
-import edu.neu.coe.info6205.life.library.Library;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -104,14 +102,17 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 
 		/**
 		 * Main program for Game of Life.
-		 * @param args the name of the starting pattern (defaults to "Blip")
+		 * @param
 		 */
-		public static void main(String[] args) {
-				String patternName = args.length > 0 ? args[0] : "Blip";
-				System.out.println("Game of Life with starting pattern: " + patternName);
-				final String pattern = Library.get(patternName);
-				final Behavior generations = run(0L, pattern);
+		public Behavior start(String s) {
+				//String patternName = args.length > 0 ? args[0] : "Blip";
+				System.out.println("Game of Life with starting pattern: " );
+				//final String pattern = Library.get(patternName);
+                //Driver test = new Driver();
+
+			    final Behavior generations = run(0L, s);
 				System.out.println("Ending Game of Life after " + generations + " generations");
+				return generations;
 		}
 
 		/**
