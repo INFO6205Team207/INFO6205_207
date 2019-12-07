@@ -31,7 +31,7 @@ public abstract class GeneticAlgorithm {
         this.geneSize = geneSize;
     }
 
-    private void init() {
+    public void init() {
         population = new ArrayList<>();
         for (int i = 0; i < popSize; i++) {
             Chromosome chromosome = new Chromosome(geneSize);
@@ -85,7 +85,7 @@ public abstract class GeneticAlgorithm {
 
     public abstract double calculateFitness(String phenotype);
 
-    private Chromosome selectChromosome(){
+    public Chromosome selectChromosome(){
         double slice = Math.random() * totalScore;
         double sum = 0;
         for (Chromosome c : population) {
@@ -228,6 +228,26 @@ public abstract class GeneticAlgorithm {
 
     public double getY() {
         return y;
+    }
+
+    public void setBestScore(double bestScore) {
+        this.bestScore = bestScore;
+    }
+
+    public void setWorstScore(double worstScore) {
+        this.worstScore = worstScore;
+    }
+
+    public void setTotalScore(double totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public List<Chromosome> getPopulation() {
+        return population;
     }
 
 }
