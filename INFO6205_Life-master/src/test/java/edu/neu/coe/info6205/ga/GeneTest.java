@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class GeneTest {
 
 
-
+    //test phenotype and genetype
     @Test
     public void getNum() {
         Gene gene = new Gene();
@@ -28,11 +28,13 @@ public class GeneTest {
         boolean[] b1 = gene.getGene();
         gene.mutation();
         boolean[] b2 = gene.getGene();
+        int count = 0;
         for(int i = 0; i < b1.length; i++){
             if(b1[i] != b2[2]) {
-                assertTrue(b1[i] || b2[i]);
+              count++;
             }
         }
+        assertTrue(count < 4);
 
     }
 

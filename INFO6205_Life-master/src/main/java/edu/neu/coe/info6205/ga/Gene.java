@@ -1,7 +1,7 @@
 package edu.neu.coe.info6205.ga;
 
 public class Gene {
-    public static final int GENE_LENGTH = 4;
+    public static final int GENE_LENGTH = 3;
     private boolean[] gene;
     private double mutationRate = 0.01;
 
@@ -21,17 +21,6 @@ public class Gene {
 
     //get int value of boolean[] gene
     public int getNum() {
-//        if (gene == null) {
-//            return 0;
-//        }
-//        int num = 0;
-//        for (boolean bool : gene) {
-//            num <<= 1;
-//            if (bool) {
-//                num += 1;
-//            }
-//        }
-//        return num;
         int num = 0;
         if (gene == null) {
             return 0;
@@ -49,7 +38,6 @@ public class Gene {
         else {
 
             boolean[] ng_gene = new boolean[gene.length];
-            // 原码减一
             for (int i = gene.length -1 ; i >= 0; i--) {
                 if(!gene[i]){
                     gene[i] = true;
@@ -59,7 +47,7 @@ public class Gene {
                     break;
                 }
             }
-            //取反
+
             for (int i = 0; i<= gene.length-1; i++){
                 ng_gene[i] =! gene[i];
             }
@@ -75,6 +63,7 @@ public class Gene {
 
             }
 
+    //if random figure < mutation Rate, 0 to 1 OR 1 to 0$
     public void mutation(){
         int size = gene.length;
         for (int i = 0; i < size; i++) {

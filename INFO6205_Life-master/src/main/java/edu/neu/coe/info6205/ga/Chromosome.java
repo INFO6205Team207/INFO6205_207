@@ -42,20 +42,25 @@ public class Chromosome {
     }
 
     public static List<Chromosome> genetic(Chromosome p1, Chromosome p2) {
-        if (p1 == null || p2 == null) return null; //染色体有一个为空，不产生下一代
+        //if one chromosome is null, they cannot generate next
+        if (p1 == null || p2 == null) return null;
+        //if chromosome's genotype is null, cannot
         if (p1.genotype == null || p2.genotype == null) return null;
+        //if two chromosome dont have the same size, they cannot
         if (p1.genotype.length != p2.genotype.length) return null;
 
+        //copy two chromosoem
         Chromosome c1 = clone(p1);
         Chromosome c2 = clone(p2);
 
-        //随机产生交叉互换位置
+        //generate randome location to exchange gene
         int size = c1.genotype.length;
         int a = ((int) (Math.random() * size)) % size;
         int b = ((int) (Math.random() * size)) % size;
         int min = a > b ? b : a;
         int max = a > b ? a : b;
-        //对位置上的基因进行交叉互换
+
+        //change gene
         Gene temp = c1.genotype[a];
         c1.genotype[a] = c2.genotype[b];
         c2.genotype[b] = temp;
@@ -75,8 +80,9 @@ public class Chromosome {
     public String getPhenotype(){
         String s = genotype[0].getNum() + " "+ genotype[1].getNum() +", " + genotype[2].getNum() + " " +genotype[3].getNum() + ", " +
                  genotype[4].getNum() + " " + genotype[5].getNum() +", " + genotype[6].getNum() + " " + genotype[7].getNum() + ", " +
-                 genotype[8].getNum() + " " + genotype[9].getNum();
-                ;
+                 genotype[8].getNum() + " " + genotype[9].getNum() ;
+
+
 
         return s;
     }
@@ -89,6 +95,7 @@ public class Chromosome {
         this.score = score;
     }
 
+    //check if phenotype has duplicates
     public boolean ifDuplicate(){
         String a = String.valueOf(genotype[0].getNum() + genotype[1].getNum());
         String b = String.valueOf(genotype[2].getNum() + genotype[3].getNum());
