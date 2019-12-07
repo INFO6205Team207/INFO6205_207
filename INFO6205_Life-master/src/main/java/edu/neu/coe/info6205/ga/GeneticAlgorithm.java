@@ -8,22 +8,22 @@ public abstract class GeneticAlgorithm {
 
     private List<Chromosome> population = new ArrayList<>();//种群
     private List<Chromosome> farPopulation = new ArrayList<>();
-    private int popSize = 100;//种群数量
-    private int geneSize;//基因最大长度
-    private int maxIterNum = 500;//最大迭代次数
-    private double mutationRate = 0.01;//基因变异的概率
-    private int maxMutationNum = 3;//最大变异步长
+    private int popSize = 100;//size of population
+    private int geneSize;//max size
+    private int maxIterNum = 500;//max iteration num
+    private double mutationRate = 0.01;//probbility of mutation
+    private int maxMutationNum = 3;//max length of mutation
 
-    private int generation = 0;//当前遗传到第几代
+    private int generation = 0;//current generation of population
 
-    private double bestScore;//最好得分
-    private double worstScore;//最坏得分
-    private double totalScore;//总得分
-    private double averageScore;//平均得分
+    private double bestScore;//best fitness
+    private double worstScore;//worst fitness
+    private double totalScore;//total fitness
+    private double averageScore;//ave fitness
 
-    private String x; //记录历史种群中最好的X值
-    private double y; //记录历史种群中最好的Y值
-    private int geneI;//x y所在代数
+    private String x; //solution
+    private double y;
+    private int geneI;//generation of population which contains x
     private List<Chromosome> generation0 = new ArrayList<>();
 
 
@@ -31,7 +31,7 @@ public abstract class GeneticAlgorithm {
         this.geneSize = geneSize;
     }
 
-    private void init() {
+    public void init() {
         population = new ArrayList<>();
         for (int i = 0; i < popSize; i++) {
             Chromosome chromosome = new Chromosome(geneSize);
@@ -51,7 +51,7 @@ public abstract class GeneticAlgorithm {
         totalScore = 0;
         for (Chromosome c : population) {
             setChromosomeScore(c);
-            if (c.getScore() > bestScore) { //设置最好基因值
+            if (c.getScore() > bestScore) { //set up bestscore
                 bestScore = c.getScore();
                 if (y < bestScore) {
                     x = changeX(c);
@@ -59,17 +59,18 @@ public abstract class GeneticAlgorithm {
                     geneI = generation;
                 }
             }
-            if (c.getScore() < worstScore) { //设置最坏基因值
+            if (c.getScore() < worstScore) { //set up worst score
                 worstScore = c.getScore();
             }
             totalScore += c.getScore();
         }
         averageScore = totalScore / popSize;
-        //因为精度问题导致的平均值大于最好值，将平均值设置成最好值
+        //due to precision issues, set to best value gradually
         averageScore = averageScore > bestScore ? bestScore : averageScore;
 
     }
 
+    //get score of each chromosome
     private void setChromosomeScore(Chromosome c) {
         if(c == null) return;
         if(c.ifDuplicate() == true) {
@@ -81,16 +82,19 @@ public abstract class GeneticAlgorithm {
         c.setScore(y);
     }
 
+    //get phenotype of chromosome
     public abstract String changeX(Chromosome c);
+
 
     public abstract double calculateFitness(String phenotype);
 
-    private Chromosome selectChromosome(){
+    //Use roulette selection to select chromosomes whose fitness is not less than the average fitness
+    public Chromosome selectChromosome(){
         double slice = Math.random() * totalScore;
         double sum = 0;
         for (Chromosome c : population) {
             sum += c.getScore();
-            //转到对应的位置并且适应度不小于平均适应度
+
             if (sum > slice && c.getScore() >= averageScore) {
                 return c;
             }
@@ -107,9 +111,10 @@ public abstract class GeneticAlgorithm {
         }
     }
 
+    //generate next population
     private void evolve() {
         List<Chromosome> childPopulation = new ArrayList<>();
-        //生成下一代种群
+        //generate another population
         generateagain();
         while (childPopulation.size() < 50) {
             double prob = Math.random();
@@ -121,8 +126,7 @@ public abstract class GeneticAlgorithm {
                 p1 = selectChromosome();
                 int num = new Double(Math.random() * 10).intValue();
                 p2 = farPopulation.get(num);
-            }
-            else{
+            }else{
                 int num = new Double(Math.random() * 10).intValue();
                 int num2 = new Double(Math.random() * 10).intValue();
                 p1 = farPopulation.get(num);
@@ -136,14 +140,14 @@ public abstract class GeneticAlgorithm {
                 }
             }
         }
-        //新种群替换旧种群
+        //replace the old population with new population
         List<Chromosome> t = population;
         population = childPopulation;
         t.clear();
         t = null;
-        //基因突变
+
         mutation();
-        //计算新种群的适应度
+        //calculatie new population 's fitness
         calculateScore();
     }
 
@@ -155,19 +159,18 @@ public abstract class GeneticAlgorithm {
     }
 
     public void caculte() {
-        //初始化种群
+        //initilizing population
         generation = 0;
         init();
         while (generation < maxIterNum) {
-            //种群遗传
             evolve();
-            //print();
             generation++;
             System.out.println("-----------------------------------------------------------------------------------------------"+generation);
         }
         print();
     }
 
+    //print information of whole process
     private void print() {
         System.out.println("--------------------------------");
         //System.out.println("the generation is:" + generation);
@@ -230,5 +233,24 @@ public abstract class GeneticAlgorithm {
         return y;
     }
 
+    public void setBestScore(double bestScore) {
+        this.bestScore = bestScore;
+    }
+
+    public void setWorstScore(double worstScore) {
+        this.worstScore = worstScore;
+    }
+
+    public void setTotalScore(double totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public List<Chromosome> getPopulation() {
+        return population;
+    }
 }
 
