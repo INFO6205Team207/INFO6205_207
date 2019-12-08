@@ -36,24 +36,15 @@ Change the value in super() to define the number of cells' coordinates in the st
 
      `public static final int GENE_LENGTH = 4;`
      
-It can change the scope of each gene.
-
-4. If you change the number of cells' coordinates in the step 1, you must motify the `getPhenotype()` in the class Chromosome:
-
-        public String getPhenotype(){
-        String s = genotype[0].getNum() + " "+ genotype[1].getNum() +", " + genotype[2].getNum() + " " 
-        + genotype[3].getNum() + ", " + genotype[4].getNum() + " " + genotype[5].getNum() +", " 
-        + genotype[6].getNum() + " " + genotype[7].getNum() + ", " + genotype[8].getNum() + " " 
-        + genotype[9].getNum();
-        return s;}
+It can increase or decrease the range of generating gene.
         
 ***
 ## Result
 After 500 iterations of Genetic Algorithm, we can find the local optimum of starting pattern, the one of code result show as below(it's an example):
         
         the worst fitness is:-5.0
-        the average fitness is:-1.51
-        the total fitness is:-151.0
-        geneI:279	Starting pattern:3 7, 5 7, 4 7, 7 7, 7 7	y:50.0
+        the average fitness is:-0.11
+        the total fitness is:-11.0
+        geneI:34	Starting pattern:1 2, 3 3, 3 2, 2 2, 2 0	y:158.0
 
-In this case, the best starting pattern is 3 7, 5 7, 4 7, 7 7, 7 7, and the best cell coordinate locate at 279th generation. And this starting pattern can make the cells group lives forever.
+In this case, the best starting pattern is 1 2, 3 3, 3 2, 2 2, 2 0, and the best cell coordinate locate at 34th polulation. And this starting pattern can make the cells group lives forever.
