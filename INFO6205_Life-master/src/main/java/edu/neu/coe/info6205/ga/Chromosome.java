@@ -78,13 +78,24 @@ public class Chromosome {
     }
 
     public String getPhenotype(){
-        String s = genotype[0].getNum() + " "+ genotype[1].getNum() +", " + genotype[2].getNum() + " " +genotype[3].getNum() + ", " +
-                 genotype[4].getNum() + " " + genotype[5].getNum() +", " + genotype[6].getNum() + " " + genotype[7].getNum() + ", " +
-                 genotype[8].getNum() + " " + genotype[9].getNum() ;
+//        String s = genotype[0].getNum() + " " + genotype[1].getNum() +", " + genotype[2].getNum() + " " +genotype[3].getNum() + ", " +
+//                 genotype[4].getNum() + " " + genotype[5].getNum() +", " + genotype[6].getNum() + " " + genotype[7].getNum() + ", " +
+//                 genotype[8].getNum() + " " + genotype[9].getNum() ;
+        StringBuilder sb = new StringBuilder();
 
+        for(int i = 0; i < genotype.length; i++){
+            if (i % 2 == 0) {
+                sb.append(genotype[i].getNum());
+                sb.append(" ");
+            } else if (i % 2 != 0 && i != genotype.length - 1) {
+                sb.append(genotype[i].getNum());
+                sb.append(", ");
+            }else{
+                sb.append(genotype[i].getNum());
+            }
+        }
 
-
-        return s;
+        return sb.toString();
     }
 
     public double getScore() {
