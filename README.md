@@ -7,7 +7,7 @@ INFO6295 Final Project -- Genetic Algorithm & Game of Life
 
 
 ### Please Note
-![](https://tva1.sinaimg.cn/large/006tNbRwgy1g9qc6udx52j30yc0u0dk4.jpg)
+![](https://tva1.sinaimg.cn/large/006tNbRwgy1g9qc6udx52j30yc0u0dk4.jpg style="zoom:33%;")
 contributor myz1996 miaoyz both are Yezhi Miao's account, we just found that! 
 ***
 ## Description
