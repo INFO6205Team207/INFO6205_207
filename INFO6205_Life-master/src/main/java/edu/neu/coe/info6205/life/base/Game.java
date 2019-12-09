@@ -1,5 +1,6 @@
 package edu.neu.coe.info6205.life.base;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -52,6 +53,43 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		@Override
 		public Game generation(BiConsumer<Long, Grid> monitor) {
 				monitor.accept(generation, grid);
+//			GameUI gui = GameUI.getGUI();
+//			gui.setVisible(true);
+//
+//			for(int i = 0; i < gui.maxWidth * gui.maxLength; i++) {
+//				gui.btns.get(i).setBackground(Color.white);
+//			}
+//
+//			if(generation == 0){
+//				gui.startX = gui.g0X;
+//				gui.startY = gui.g0Y;
+//			}
+//			else{
+//				if(previous != null) {
+//					if(grid.getGroup().getOrigin().getX() != previous.grid.getGroup().getOrigin().getX() ||
+//							grid.getGroup().getOrigin().getY() != previous.grid.getGroup().getOrigin().getY()) {
+//						gui.startX = gui.startX + grid.getGroup().getOrigin().getX();
+//
+//						gui.startY = gui.startY - grid.getGroup().getOrigin().getY();
+//
+//					}
+//				}
+//			}
+//			List <Point> pp = grid.getGroup().getCurrentPoint();
+//			for(Point p: pp){
+//				gui.x_position = gui.startX + p.getX();
+//				gui.y_position = gui.startY - p.getY();
+//				if(gui.x_position < 0 || gui.x_position > gui.maxWidth || gui.y_position < 0 || gui.y_position > gui.maxLength || gui.y_position * gui.maxWidth + gui.x_position >= gui.btns.size()) {
+//					continue;
+//				}
+//
+//				gui.btns.get(gui.y_position * gui.maxWidth + gui.x_position).setBackground(Color.BLACK);
+//			}
+//			try {
+//				Thread.sleep(1);
+//			}catch(InterruptedException e) {
+//				e.printStackTrace();
+//			}
 				return new Game(generation + 1, grid.generation(this.monitor), this, this.monitor);
 		}
 

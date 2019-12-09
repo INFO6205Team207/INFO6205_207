@@ -52,6 +52,9 @@ public class Group implements Generational<Group, Void>, Renderable, Countable {
 				assert ok : "create: problem adding: " + string;
 				return result;
 		}
+		public List<Point> getCurrentPoint() {
+			return new ArrayList<>(this.points);
+		}
 
 		/**
 		 * Appends the specified point to the list of points and normalizes the Group.

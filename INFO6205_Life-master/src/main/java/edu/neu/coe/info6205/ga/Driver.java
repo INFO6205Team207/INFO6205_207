@@ -29,6 +29,5 @@ public class Driver extends GeneticAlgorithm {
         test.caculte();
 
 
-
     }
 }
