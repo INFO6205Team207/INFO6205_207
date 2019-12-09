@@ -55,31 +55,51 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		@Override
 		public Game generation(BiConsumer<Long, Grid> monitor) {
 				monitor.accept(generation, grid);
-				GameUI ui = GameUI.createUI();
-				ui.setVisible(true);
-				for(int i = 0; i < ui.maxWidth * ui.maxLength; i++) {
-					ui.btns.get(i).setBackground(Color.white);
+
+				gameview.setVisible(true);
+				//get blank as white
+				for(int i = 0; i < gameview.maxWidth * gameview.maxLength; i++) {
+					gameview.btns.get(i).setBackground(Color.white);
 				}
 
 				if(generation == 0){
-					ui.init_x = ui.pre_x;
-					ui.init_y = ui.pre_y;
+
+					gameview.init_x = gameview.pre_x;
+					gameview.init_y = gameview.pre_y;
+
 				}else if(previous != null) {
-					if(grid.getGroup().getOrigin().getX() != previous.grid.getGroup().getOrigin().getX() ||
-							grid.getGroup().getOrigin().getY() != previous.grid.getGroup().getOrigin().getY()) {
-							ui.init_x = ui.init_x + grid.getGroup().getOrigin().getX();
-							ui.init_y = ui.init_y - grid.getGroup().getOrigin().getY();
+
+					int gridOriginX = grid.getGroup().getOrigin().getX();
+					int gridOriginY = grid.getGroup().getOrigin().getY();
+					int preGridX = previous.grid.getGroup().getOrigin().getX();
+					int preGridY = previous.grid.getGroup().getOrigin().getY();
+
+					if(gridOriginX != preGridX) {
+						gameview.init_x += gridOriginX;
+						gameview.init_y -= gridOriginY;
+					}else if(gridOriginY != preGridY){
+						gameview.init_x += gridOriginX;
+						gameview.init_y -= gridOriginY;
 					}
 				}
 				List <Point> pp = grid.getGroup().getCurrentPoint();
 				for(Point p: pp){
-					ui.x_position = ui.init_x + p.getX();
-					ui.y_position = ui.init_y - p.getY();
-					if(ui.x_position < 0 || ui.x_position > ui.maxWidth || ui.y_position < 0 || ui.y_position > ui.maxLength || ui.y_position * ui.maxWidth + ui.x_position >= ui.btns.size()) {
+					gameview.x_position = gameview.init_x + p.getX();
+					gameview.y_position = gameview.init_y - p.getY();
+					int position = gameview.y_position * gameview.maxWidth + gameview.x_position;
+
+					if(gameview.x_position < 0) {
+						continue;
+					}else if(gameview.y_position < 0){
+						continue;
+					}else if(gameview.x_position > gameview.maxWidth){
+						continue;
+					}else if(gameview.y_position > gameview.maxLength){
+						continue;
+					}else if(position >= gameview.btns.size()){
 						continue;
 					}
-
-					ui.btns.get(ui.y_position * ui.maxWidth + ui.x_position).setBackground(Color.BLACK);
+					gameview.btns.get(position).setBackground(Color.BLACK);
 				}
 				try {
 					Thread.sleep(10);
@@ -354,4 +374,5 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		private final Game previous;
 		private final BiConsumer<Long, Group> monitor;
 		private final long generation;
+		GameUI gameview = GameUI.createUI();
 }
