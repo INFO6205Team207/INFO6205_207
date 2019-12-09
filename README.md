@@ -5,9 +5,10 @@ INFO6295 Final Project -- Genetic Algorithm & Game of Life
 ## Team 207
 #### Team Member：Yezhi Miao，Ran Zhou
 
+===================================  
 
 ### Please Note
-![](https://tva1.sinaimg.cn/large/006tNbRwgy1g9qc6udx52j30yc0u0dk4.jpg style="zoom:33%;")
+![](https://tva1.sinaimg.cn/large/006tNbRwgy1g9qc6udx52j30yc0u0dk4.jpg")
 contributor myz1996 miaoyz both are Yezhi Miao's account, we just found that! 
 ***
 ## Description
