@@ -1,6 +1,6 @@
 package edu.neu.coe.info6205.life.base;
 
-import edu.neu.coe.info6205.ui.GameUI;
+//import edu.neu.coe.info6205.ui.GameUI;
 
 import java.awt.*;
 import java.util.List;
@@ -55,57 +55,6 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		@Override
 		public Game generation(BiConsumer<Long, Grid> monitor) {
 				monitor.accept(generation, grid);
-
-				gameview.setVisible(true);
-				//get blank as white
-				for(int i = 0; i < gameview.maxWidth * gameview.maxLength; i++) {
-					gameview.btns.get(i).setBackground(Color.white);
-				}
-
-				if(generation == 0){
-
-					gameview.init_x = gameview.pre_x;
-					gameview.init_y = gameview.pre_y;
-
-				}else if(previous != null) {
-
-					int gridOriginX = grid.getGroup().getOrigin().getX();
-					int gridOriginY = grid.getGroup().getOrigin().getY();
-					int preGridX = previous.grid.getGroup().getOrigin().getX();
-					int preGridY = previous.grid.getGroup().getOrigin().getY();
-
-					if(gridOriginX != preGridX) {
-						gameview.init_x += gridOriginX;
-						gameview.init_y -= gridOriginY;
-					}else if(gridOriginY != preGridY){
-						gameview.init_x += gridOriginX;
-						gameview.init_y -= gridOriginY;
-					}
-				}
-				List <Point> pp = grid.getGroup().getCurrentPoint();
-				for(Point p: pp){
-					gameview.x_position = gameview.init_x + p.getX();
-					gameview.y_position = gameview.init_y - p.getY();
-					int position = gameview.y_position * gameview.maxWidth + gameview.x_position;
-
-					if(gameview.x_position < 0) {
-						continue;
-					}else if(gameview.y_position < 0){
-						continue;
-					}else if(gameview.x_position > gameview.maxWidth){
-						continue;
-					}else if(gameview.y_position > gameview.maxLength){
-						continue;
-					}else if(position >= gameview.btns.size()){
-						continue;
-					}
-					gameview.btns.get(position).setBackground(Color.BLACK);
-				}
-				try {
-					Thread.sleep(10);
-				}catch(InterruptedException e) {
-					e.printStackTrace();
-				}
 				return new Game(generation + 1, grid.generation(this.monitor), this, this.monitor);
 		}
 
@@ -374,5 +323,5 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		private final Game previous;
 		private final BiConsumer<Long, Group> monitor;
 		private final long generation;
-		GameUI gameview = GameUI.createUI();
+//		GameUI gameview = GameUI.createUI();
 }
