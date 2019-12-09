@@ -5,6 +5,10 @@ INFO6295 Final Project -- Genetic Algorithm & Game of Life
 ## Team 207
 #### Team Member：Yezhi Miao，Ran Zhou
 
+---
+
+### Please Note
+contributor **myz1996 miaoyz** both are Yezhi Miao's account, we just found that! 
 ***
 ## Description
 We use **Genetic Algorithm** to generate local optimum for the starting pattern of Game of Life and make the game running forever. 
@@ -31,7 +35,7 @@ We used genetic algorithm to generate random starting pattern and find the local
 
     `public Driver() { super(10);}`
 
-Change the value in super() to define the number of cells' coordinates in the start pattern. And the value must be even.
+   Change the value in super() to define the number of cells' coordinates in the start pattern. And the value must be even.
 3. In class Gene, change the value of GENE_LENGTH in the following code:
 
     `public static final int GENE_LENGTH = 4;`
